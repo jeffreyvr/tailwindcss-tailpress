@@ -1,0 +1,19 @@
+{
+  "name": "@jeffreyvr/tailwindcss-tailpress",
+  "version": "0.1.0",
+  "description": "Tailwind plugin for TailPress.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tailwind",
+    "tailpress",
+    "wordpress"
+  ],
+  "author": "Jeffrey van Rossum",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^2.2.7"
+  }
+}
