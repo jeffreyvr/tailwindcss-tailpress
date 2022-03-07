@@ -16,20 +16,49 @@ const colorMapper = (colors) => {
     return result;
 }
 
+const fontSizeMapper = (fontSizes) => {
+    let result = {};
+
+    fontSizes.forEach(function(fontSize) {
+        result[''+fontSize.slug+''] = fontSize.size;
+    });
+
+    return result;
+}
+
 const tailwind = plugin(function ({addUtilities, addComponents, e, prefix, config, theme}) {
     const colors = theme('colors');
     const margin = theme('margin');
     const screens = theme('screens');
     const fontSize = theme('fontSize');
 
+    const widthUtilities = {
+        '.w-wide': {
+            maxWidth: `${screens['xl']}`,
+        },
+        '.w-content': {
+            width: `${screens['lg']}`,
+        }
+    };
+
+    const maxWidthUtilities = {
+        '.max-w-wide': {
+            maxWidth: `${screens['xl']}`,
+        },
+        '.max-w-content': {
+            maxWidth: `${screens['lg']}`,
+        }
+    };
+
     const alignmentUtilities = {
         '.alignfull': {
-            margin: `${margin[2] || '0.5rem'} calc(50% - 50vw)`,
-            maxWidth: '100vw',
+            margin: `${margin[8] || '0.5rem'} calc(50% - 50vw) !important`,
+            maxWidth: '100vw !important',
             "@apply w-screen": {}
         },
         '.alignwide': {
-            "@apply -mx-16 my-2 max-w-screen-xl": {}
+            margin: `${margin[8] || '0.5rem'} 0`,
+            "@apply !max-w-wide": {}
         },
         '.alignnone': {
             "@apply h-auto max-w-full mx-0": {}
@@ -70,10 +99,10 @@ const tailwind = plugin(function ({addUtilities, addComponents, e, prefix, confi
         },
     };
 
-    addUtilities([alignmentUtilities, imageCaptions], {
+    addUtilities([widthUtilities, maxWidthUtilities, alignmentUtilities , imageCaptions], {
         respectPrefix: false,
         respectImportant: false,
     });
 });
 
-module.exports = {theme, colorMapper, tailwind};
+module.exports = {theme, colorMapper, fontSizeMapper, tailwind};
